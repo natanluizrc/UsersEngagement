@@ -1,0 +1,80 @@
+table '(Tab05) Get Users'
+	lineageTag: e481cd53-c30b-40f1-b95a-df6461ea5221
+
+	column Group_Id
+		dataType: string
+		lineageTag: 55b6cac7-d111-44dc-9c55-787e41e601d6
+		summarizeBy: none
+		sourceColumn: Group_Id
+
+		annotation SummarizationSetBy = Automatic
+
+	column Users_GroupUserAccessRight
+		dataType: string
+		lineageTag: 10eb753c-43a8-4ba5-988b-1fdcb690a3ba
+		summarizeBy: none
+		sourceColumn: Users_GroupUserAccessRight
+
+		annotation SummarizationSetBy = Automatic
+
+	column Users_DisplayName
+		dataType: string
+		lineageTag: 7478cd19-35e6-458b-804a-0e83dfe80d98
+		summarizeBy: none
+		sourceColumn: Users_DisplayName
+
+		annotation SummarizationSetBy = Automatic
+
+	column Users_Identifier
+		dataType: string
+		lineageTag: b88450be-7d60-4168-90fa-ee9458b7c1d2
+		summarizeBy: none
+		sourceColumn: Users_Identifier
+
+		annotation SummarizationSetBy = Automatic
+
+	column Users_PrincipalType
+		dataType: string
+		lineageTag: faa39f10-5b5d-4e46-ac1e-dadfc2e17855
+		summarizeBy: none
+		sourceColumn: Users_PrincipalType
+
+		annotation SummarizationSetBy = Automatic
+
+	partition '(Tab05) Get Users' = m
+		mode: import
+		source = ```
+				let
+				    // Fonte de dados: obtenção de grupos
+				    Source = #"(Tab01) Get Groups",
+				
+				    // Seleção de apenas a coluna "Group_Id"
+				    #"Removed Other Columns" = Table.SelectColumns(Source, {"Group_Id"}),
+				
+				    // Adiciona coluna para invocar a função de obter usuários
+				    #"Invoked Custom Function" = Table.AddColumn(#"Removed Other Columns", "(Fun) Get Users", each #"(Fun05) Get Users"([Group_Id])),
+				
+				    // Expande a coluna de usuários
+				    #"Expanded (Fun) Get Users" = Table.ExpandTableColumn(#"Invoked Custom Function", "(Fun) Get Users", {"Column1"}, {"Column1"}),
+				
+				    // Expande as colunas de usuários
+				    #"Expanded Column1" = Table.ExpandRecordColumn(#"Expanded (Fun) Get Users", "Column1", 
+				        {"groupUserAccessRight", "displayName", "identifier", "principalType"},
+				        {"Users_GroupUserAccessRight", "Users_DisplayName", "Users_Identifier", "Users_PrincipalType"}),
+				
+				    // Ajusta os tipos das colunas
+				    #"Changed Type" = Table.TransformColumnTypes(#"Expanded Column1", {
+				        {"Group_Id", type text}, 
+				        {"Users_GroupUserAccessRight", type text}, 
+				        {"Users_DisplayName", type text}, 
+				        {"Users_Identifier", type text}, 
+				        {"Users_PrincipalType", type text}
+				    })
+				in
+				    #"Changed Type"
+				```
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+
