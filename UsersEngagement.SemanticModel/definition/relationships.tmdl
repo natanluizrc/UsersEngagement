@@ -1,0 +1,26 @@
+relationship AutoDetected_ebfaadbc-3f13-43c1-8c82-26b688cac8de
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: '(Tab02) Get Reports'.Group_Id
+	toColumn: '(Tab01) Get Groups'.Group_Id
+
+relationship AutoDetected_1b77ab30-9324-4872-bb53-a0231cfccf2f
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: '(Tab03) Get Datasets'.Group_Id
+	toColumn: '(Tab01) Get Groups'.Group_Id
+
+relationship AutoDetected_f54e34b7-3cbf-481f-9a30-d3e59cec6f13
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: '(Tab04) Get Dataflows'.Group_Id
+	toColumn: '(Tab01) Get Groups'.Group_Id
+
+relationship AutoDetected_0c9c0860-2f90-47c7-af49-69f28fe0d990
+	fromColumn: '(Tab05) Get Users'.Group_Id
+	toColumn: '(Tab01) Get Groups'.Group_Id
+
+relationship d995e6b5-aba6-c144-aee7-398f1ff69b14
+	fromColumn: '(Tab06) Get Activity Events'.ActivityEvents_WorkspaceId
+	toColumn: '(Tab01) Get Groups'.Group_Id
+
