@@ -1,0 +1,293 @@
+table '(Tab06) Get Activity Events'
+	lineageTag: 415e555b-6f37-4022-a7a0-ee04a52643b4
+
+	column ActivityEvents_Id
+		dataType: string
+		lineageTag: 659fe080-7184-4c70-855d-0e1f1733d199
+		summarizeBy: none
+		sourceColumn: ActivityEvents_Id
+
+		annotation SummarizationSetBy = Automatic
+
+	column ActivityEvents_RecordType
+		dataType: int64
+		formatString: 0
+		lineageTag: f1c3cf2d-d001-4ebb-b998-3bcf43623462
+		summarizeBy: sum
+		sourceColumn: ActivityEvents_RecordType
+
+		annotation SummarizationSetBy = Automatic
+
+	column ActivityEvents_CreationTime
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 34da795d-8f7a-4844-b501-11f82c3eb964
+		summarizeBy: none
+		sourceColumn: ActivityEvents_CreationTime
+
+		annotation SummarizationSetBy = Automatic
+
+	column ActivityEvents_Operation
+		dataType: string
+		lineageTag: 2ee0210e-a2cb-4ca4-889f-adb517256876
+		summarizeBy: none
+		sourceColumn: ActivityEvents_Operation
+
+		annotation SummarizationSetBy = Automatic
+
+	column ActivityEvents_OrganizationId
+		dataType: string
+		lineageTag: 097480b5-3471-43b3-9340-4e05bd34890f
+		summarizeBy: none
+		sourceColumn: ActivityEvents_OrganizationId
+
+		annotation SummarizationSetBy = Automatic
+
+	column ActivityEvents_UserType
+		dataType: int64
+		formatString: 0
+		lineageTag: e2c70711-7d09-4aed-b672-4bab4fa1e714
+		summarizeBy: sum
+		sourceColumn: ActivityEvents_UserType
+
+		annotation SummarizationSetBy = Automatic
+
+	column ActivityEvents_UserKey
+		dataType: string
+		lineageTag: 657f0176-7191-4b48-acbe-37596bd37fc2
+		summarizeBy: none
+		sourceColumn: ActivityEvents_UserKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column ActivityEvents_Workload
+		dataType: string
+		lineageTag: b3e8049a-1b7c-469f-9028-9b8c3a0b55da
+		summarizeBy: none
+		sourceColumn: ActivityEvents_Workload
+
+		annotation SummarizationSetBy = Automatic
+
+	column ActivityEvents_UserId
+		dataType: string
+		lineageTag: b1bea4ce-a03e-4727-b2db-681b07d82ca3
+		summarizeBy: none
+		sourceColumn: ActivityEvents_UserId
+
+		annotation SummarizationSetBy = Automatic
+
+	column ActivityEvents_ClientIP
+		dataType: string
+		lineageTag: 3d849419-5674-4258-b5bb-44d5ec6c854a
+		summarizeBy: none
+		sourceColumn: ActivityEvents_ClientIP
+
+		annotation SummarizationSetBy = Automatic
+
+	column ActivityEvents_UserAgent
+		dataType: string
+		lineageTag: f005ae20-331b-47e9-bfa8-37fedc3bd253
+		summarizeBy: none
+		sourceColumn: ActivityEvents_UserAgent
+
+		annotation SummarizationSetBy = Automatic
+
+	column ActivityEvents_Activity
+		dataType: string
+		lineageTag: a71e23bf-3fdc-47c0-b294-559558b194f5
+		summarizeBy: none
+		sourceColumn: ActivityEvents_Activity
+
+		annotation SummarizationSetBy = Automatic
+
+	column ActivityEvents_IsSuccess
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 6c6acaae-0466-40cb-b90f-88044dd09fa6
+		summarizeBy: none
+		sourceColumn: ActivityEvents_IsSuccess
+
+		annotation SummarizationSetBy = Automatic
+
+	column ActivityEvents_RequestId
+		dataType: string
+		lineageTag: 9e60b7b3-f025-4c27-8100-3b0baedd8be2
+		summarizeBy: none
+		sourceColumn: ActivityEvents_RequestId
+
+		annotation SummarizationSetBy = Automatic
+
+	column ActivityEvents_ActivityId
+		dataType: string
+		lineageTag: b8ab0678-a08d-43cd-a467-f4604251bbf5
+		summarizeBy: none
+		sourceColumn: ActivityEvents_ActivityId
+
+		annotation SummarizationSetBy = Automatic
+
+	column ActivityEvents_ModelsSnapshots
+		dataType: string
+		lineageTag: c7189884-5e0f-4d23-a50a-35e1189901f7
+		summarizeBy: none
+		sourceColumn: ActivityEvents_ModelsSnapshots
+
+		annotation SummarizationSetBy = Automatic
+
+	column ActivityEvents_RefreshEnforcementPolicy
+		dataType: int64
+		formatString: 0
+		lineageTag: 7409d0db-23ef-4aed-aea0-f8721d14c72c
+		summarizeBy: sum
+		sourceColumn: ActivityEvents_RefreshEnforcementPolicy
+
+		annotation SummarizationSetBy = Automatic
+
+	column ActivityEvents_BillingType
+		dataType: int64
+		formatString: 0
+		lineageTag: f71fe9d8-acc2-42a3-b9fa-f5f089367477
+		summarizeBy: sum
+		sourceColumn: ActivityEvents_BillingType
+
+		annotation SummarizationSetBy = Automatic
+
+	column ActivityEvents_ItemName
+		dataType: string
+		lineageTag: 65e292fd-dc58-40ff-8c67-86ca26b92e84
+		summarizeBy: none
+		sourceColumn: ActivityEvents_ItemName
+
+		annotation SummarizationSetBy = Automatic
+
+	column ActivityEvents_WorkSpaceName
+		dataType: string
+		lineageTag: b1515feb-5fb1-4dfc-8bb6-07cbdf1ea2e0
+		summarizeBy: none
+		sourceColumn: ActivityEvents_WorkSpaceName
+
+		annotation SummarizationSetBy = Automatic
+
+	column ActivityEvents_WorkspaceId
+		dataType: string
+		lineageTag: 53323f76-9222-4ac0-8b1f-62384f5d60b7
+		summarizeBy: none
+		sourceColumn: ActivityEvents_WorkspaceId
+
+		annotation SummarizationSetBy = Automatic
+
+	column ActivityEvents_ObjectId
+		dataType: string
+		lineageTag: d8bedf5d-6953-4e34-a677-3dd5d634bceb
+		summarizeBy: none
+		sourceColumn: ActivityEvents_ObjectId
+
+		annotation SummarizationSetBy = Automatic
+
+	column ActivityEvents_FolderObjectId
+		dataType: string
+		lineageTag: ee9b8923-1094-46c2-9f42-a777aa517dd3
+		summarizeBy: none
+		sourceColumn: ActivityEvents_FolderObjectId
+
+		annotation SummarizationSetBy = Automatic
+
+	column ActivityEvents_FolderDisplayName
+		dataType: string
+		lineageTag: 8407bad2-ac8b-486e-ba0f-f860a045406f
+		summarizeBy: none
+		sourceColumn: ActivityEvents_FolderDisplayName
+
+		annotation SummarizationSetBy = Automatic
+
+	column ActivityEvents_RolePermissions
+		dataType: string
+		lineageTag: e949ad0c-d147-4314-a8c1-503d3bf8ddcf
+		summarizeBy: none
+		sourceColumn: ActivityEvents_RolePermissions
+
+		annotation SummarizationSetBy = Automatic
+
+	column ActivityEvents_UserObjectId
+		dataType: string
+		lineageTag: d3db8cd9-3db9-4169-b7cd-fb08e02accfc
+		summarizeBy: none
+		sourceColumn: ActivityEvents_UserObjectId
+
+		annotation SummarizationSetBy = Automatic
+
+	partition '(Tab06) Get Activity Events' = m
+		mode: import
+		source = ```
+				let 
+				    // Função para recuperar o token de acesso usando GetAccessToken
+				    TokenDeAcesso = #"(Fun01) Get Token"(),
+				
+				    // Define o endpoint da API do Power BI para recuperar os eventos de atividade com um intervalo de tempo específico
+				    EndpointPowerBi = "https://api.powerbi.com/v1.0/myorg/admin/activityevents?startDateTime='2025-03-07T00:00:00.000Z'&endDateTime='2025-03-07T23:59:59.999Z'",
+				
+				    // Envia uma requisição GET para a API do Power BI, incluindo o token de acesso para autorização
+				    RespostaApi = Json.Document(Web.Contents(EndpointPowerBi, [
+				        Headers = [#"Authorization" = "Bearer " & TokenDeAcesso]
+				    ])),
+				
+				    // Acessa a entidade de eventos de atividade na resposta da API
+				    activityEventEntities = RespostaApi[activityEventEntities],
+				
+				    // Converte os dados de eventos em uma tabela
+				    TabelaWorkspaces = Table.FromList(activityEventEntities, Splitter.SplitByNothing(), null, null, ExtraValues.Error),
+				
+				    // Expande as colunas da tabela para incluir os detalhes dos eventos de atividade
+				    #"Column1 Expandido" = Table.ExpandRecordColumn(TabelaWorkspaces, "Column1", 
+				        {"Id", "RecordType", "CreationTime", "Operation", "OrganizationId", "UserType", "UserKey", "Workload", "UserId", 
+				         "ClientIP", "UserAgent", "Activity", "IsSuccess", "RequestId", "ActivityId", "ModelsSnapshots", "RefreshEnforcementPolicy", 
+				         "BillingType", "ItemName", "WorkSpaceName", "WorkspaceId", "ObjectId", "FolderObjectId", "FolderDisplayName", "FolderAccessRequests"}, 
+				        {"Id", "RecordType", "CreationTime", "Operation", "OrganizationId", "UserType", "UserKey", "Workload", "UserId", 
+				         "ClientIP", "UserAgent", "Activity", "IsSuccess", "RequestId", "ActivityId", "ModelsSnapshots", "RefreshEnforcementPolicy", 
+				         "BillingType", "ItemName", "WorkSpaceName", "WorkspaceId", "ObjectId", "FolderObjectId", "FolderDisplayName", "FolderAccessRequests"}),
+				
+				    // Renomeia as colunas para melhorar a legibilidade
+				    #"Colunas Renomeadas1" = Table.RenameColumns(#"Column1 Expandido",{
+				        {"Id", "ActivityEvents_Id"}, {"RecordType", "ActivityEvents_RecordType"}, {"CreationTime", "ActivityEvents_CreationTime"}, 
+				        {"Operation", "ActivityEvents_Operation"}, {"OrganizationId", "ActivityEvents_OrganizationId"}, 
+				        {"UserType", "ActivityEvents_UserType"}, {"UserKey", "ActivityEvents_UserKey"}, {"Workload", "ActivityEvents_Workload"}, 
+				        {"UserId", "ActivityEvents_UserId"}, {"ClientIP", "ActivityEvents_ClientIP"}, {"UserAgent", "ActivityEvents_UserAgent"}, 
+				        {"Activity", "ActivityEvents_Activity"}, {"IsSuccess", "ActivityEvents_IsSuccess"}, {"RequestId", "ActivityEvents_RequestId"}, 
+				        {"ActivityId", "ActivityEvents_ActivityId"}, {"ModelsSnapshots", "ActivityEvents_ModelsSnapshots"}, 
+				        {"RefreshEnforcementPolicy", "ActivityEvents_RefreshEnforcementPolicy"}, {"BillingType", "ActivityEvents_BillingType"}, 
+				        {"ItemName", "ActivityEvents_ItemName"}, {"WorkSpaceName", "ActivityEvents_WorkSpaceName"}, 
+				        {"WorkspaceId", "ActivityEvents_WorkspaceId"}, {"ObjectId", "ActivityEvents_ObjectId"}, 
+				        {"FolderObjectId", "ActivityEvents_FolderObjectId"}, {"FolderDisplayName", "ActivityEvents_FolderDisplayName"}, 
+				        {"FolderAccessRequests", "ActivityEvents_FolderAccessRequests"}}),
+				
+				    // Expande as colunas "ModelsSnapshots" e "FolderAccessRequests" para incluir detalhes adicionais
+				    #"ActivityEvents_ModelsSnapshots Expandido1" = Table.ExpandListColumn(#"Colunas Renomeadas1", "ActivityEvents_ModelsSnapshots"),
+				    #"ActivityEvents_FolderAccessRequests Expandido" = Table.ExpandListColumn(#"ActivityEvents_ModelsSnapshots Expandido1", "ActivityEvents_FolderAccessRequests"),
+				
+				    // Expande os detalhes de acesso à pasta
+				    #"ActivityEvents_FolderAccessRequests Expandido1" = Table.ExpandRecordColumn(#"ActivityEvents_FolderAccessRequests Expandido", "ActivityEvents_FolderAccessRequests", 
+				        {"RolePermissions", "UserObjectId"}, {"RolePermissions", "UserObjectId"}),
+				
+				    // Renomeia as colunas relacionadas ao acesso à pasta para melhorar a clareza
+				    #"Colunas Renomeadas2" = Table.RenameColumns(#"ActivityEvents_FolderAccessRequests Expandido1",{
+				        {"RolePermissions", "ActivityEvents_RolePermissions"}, {"UserObjectId", "ActivityEvents_UserObjectId"}}),
+				
+				    // Ajusta os tipos de dados das colunas para os tipos apropriados
+				    #"Tipo Alterado" = Table.TransformColumnTypes(#"Colunas Renomeadas2",{
+				        {"ActivityEvents_Id", type text}, {"ActivityEvents_RecordType", Int64.Type}, {"ActivityEvents_CreationTime", type datetime}, 
+				        {"ActivityEvents_Operation", type text}, {"ActivityEvents_OrganizationId", type text}, {"ActivityEvents_UserType", Int64.Type}, 
+				        {"ActivityEvents_UserKey", type text}, {"ActivityEvents_Workload", type text}, {"ActivityEvents_UserId", type text}, 
+				        {"ActivityEvents_ClientIP", type text}, {"ActivityEvents_UserAgent", type text}, {"ActivityEvents_Activity", type text}, 
+				        {"ActivityEvents_IsSuccess", type logical}, {"ActivityEvents_RequestId", type text}, {"ActivityEvents_ActivityId", type text}, 
+				        {"ActivityEvents_ModelsSnapshots", type any}, {"ActivityEvents_RefreshEnforcementPolicy", Int64.Type}, 
+				        {"ActivityEvents_BillingType", Int64.Type}, {"ActivityEvents_ItemName", type text}, {"ActivityEvents_WorkSpaceName", type text}, 
+				        {"ActivityEvents_WorkspaceId", type text}, {"ActivityEvents_ObjectId", type text}, {"ActivityEvents_FolderObjectId", type text}, 
+				        {"ActivityEvents_FolderDisplayName", type text}, {"ActivityEvents_RolePermissions", type text}, 
+				        {"ActivityEvents_UserObjectId", type text}})
+				in
+				    #"Tipo Alterado"
+				```
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+
