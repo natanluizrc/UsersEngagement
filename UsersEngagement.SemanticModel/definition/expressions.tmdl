@@ -1,0 +1,150 @@
+expression '(Fun01) Get Token' = ```
+		let
+		    // Função para obter o token de acesso usando as credenciais armazenadas no arquivo JSON
+		    GetAccessToken = () =>
+		    let
+		        // Caminho absoluto para o arquivo de credenciais
+		        CredentialsFilePath = "C:\\Users\\natan\\OneDrive\\NtnLz\\Projetos\\UserEngagement\\UserEngagement.Credentials\\.pbi\\credentials.json", 
+		
+		        // Carrega as credenciais do arquivo JSON
+		        CredentialsJson = Json.Document(File.Contents(CredentialsFilePath)),
+		
+		        // Extrai as credenciais do JSON
+		        TenantId = CredentialsJson[TenantId],
+		        ClientId = CredentialsJson[ClientId],
+		        ClientSecret = CredentialsJson[ClientSecret],
+		
+		        // URL para obter o token
+		        UrlToken = "https://login.microsoftonline.com/" & TenantId & "/oauth2/v2.0/token",
+		
+		        // Parâmetros para solicitar o token
+		        Data = "grant_type=client_credentials&client_id=" & ClientId & "&client_secret=" & ClientSecret & "&scope=https://analysis.windows.net/powerbi/api/.default",
+		
+		        // Faz a requisição para obter o token
+		        TokenResponse = Web.Contents(UrlToken, [
+		            Content = Text.ToBinary(Data),
+		            Headers = [#"Content-Type"="application/x-www-form-urlencoded"]
+		        ]),
+		
+		        // Extrai o token de acesso
+		        TokenJson = Json.Document(TokenResponse),
+		        AccessToken = TokenJson[access_token]
+		    in
+		        AccessToken // Retorna o token de acesso
+		in
+		    GetAccessToken
+		```
+	lineageTag: 4ec0481a-21a4-4ca7-bef3-d1f6c89e2418
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Function
+
+expression '(Fun02) Get Reports' =
+		(Group_Id as text) =>
+		let
+		    // Função para recuperar o token de acesso usando GetAccessToken
+		    TokenDeAcesso = #"(Fun01) Get Token"(),
+		
+		    // Define o endpoint da API do Power BI para listar os relatórios do grupo
+		    EndpointPowerBi = "https://api.powerbi.com/v1.0/myorg/groups/" & Group_Id & "/reports",
+		
+		    // Enviar uma requisição GET para a API do Power BI, incluindo o token de acesso para autorização
+		    RespostaApi = Json.Document(Web.Contents(EndpointPowerBi, [
+		        Headers = [#"Authorization" = "Bearer " & TokenDeAcesso]
+		    ])),
+		
+		    // Extrair a lista de relatórios da resposta da API
+		    DadosRelatorios = RespostaApi[value],
+		
+		    // Converter a lista de relatórios para um formato de tabela
+		    TabelaRelatorios = Table.FromList(DadosRelatorios, Splitter.SplitByNothing(), null, null, ExtraValues.Error)
+		in
+		    TabelaRelatorios
+	lineageTag: 3191f12d-4bf9-4c3c-97d6-4955e31c01ba
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Function
+
+expression '(Fun03) Get Datasets' =
+		(Group_Id as text) =>
+		let
+		    // Função para recuperar o token de acesso usando GetAccessToken
+		    TokenDeAcesso = #"(Fun01) Get Token"(),
+		
+		    // Define o endpoint da API do Power BI para listar os datasets do grupo
+		    EndpointPowerBi = "https://api.powerbi.com/v1.0/myorg/groups/" & Group_Id & "/datasets",
+		
+		    // Enviar uma requisição GET para a API do Power BI, incluindo o token de acesso para autorização
+		    RespostaApi = Json.Document(Web.Contents(EndpointPowerBi, [
+		        Headers = [#"Authorization" = "Bearer " & TokenDeAcesso]
+		    ])),
+		
+		    // Extrair a lista de datasets da resposta da API
+		    DadosDatasets = RespostaApi[value],
+		
+		    // Converter a lista de datasets para um formato de tabela
+		    TabelaDatasets = Table.FromList(DadosDatasets, Splitter.SplitByNothing(), null, null, ExtraValues.Error)
+		in
+		    TabelaDatasets
+	lineageTag: 59ec6a1d-8ce4-463c-82ed-f94794df69ef
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Function
+
+expression '(Fun04) Get Dataflows' =
+		(Group_Id as text) =>
+		let
+		    // Função para recuperar o token de acesso usando GetAccessToken
+		    TokenDeAcesso = #"(Fun01) Get Token"(),
+		
+		    // Define o endpoint da API do Power BI para listar os dataflows do grupo
+		    EndpointPowerBi = "https://api.powerbi.com/v1.0/myorg/groups/" & Group_Id & "/dataflows",
+		
+		    // Enviar uma requisição GET para a API do Power BI, incluindo o token de acesso para autorização
+		    RespostaApi = Json.Document(Web.Contents(EndpointPowerBi, [
+		        Headers = [#"Authorization" = "Bearer " & TokenDeAcesso]
+		    ])),
+		
+		    // Extrair a lista de dataflows da resposta da API
+		    DadosDataflows = RespostaApi[value],
+		
+		    // Converter a lista de dataflows para um formato de tabela
+		    TabelaDataflows = Table.FromList(DadosDataflows, Splitter.SplitByNothing(), null, null, ExtraValues.Error)
+		in
+		    TabelaDataflows
+	lineageTag: 978db77c-8bbc-4144-8da3-80f6fe6abf15
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Function
+
+expression '(Fun05) Get Users' =
+		(Group_Id as text) =>
+		let
+		    // Função para recuperar o token de acesso usando GetAccessToken
+		    TokenDeAcesso = #"(Fun01) Get Token"(),
+		
+		    // Define o endpoint da API do Power BI para listar os usuários do grupo
+		    EndpointPowerBi = "https://api.powerbi.com/v1.0/myorg/groups/" & Group_Id & "/users",
+		
+		    // Enviar uma requisição GET para a API do Power BI, incluindo o token de acesso para autorização
+		    RespostaApi = Json.Document(Web.Contents(EndpointPowerBi, [
+		        Headers = [#"Authorization" = "Bearer " & TokenDeAcesso]
+		    ])),
+		
+		    // Extrair a lista de usuários da resposta da API
+		    DadosUsuarios = RespostaApi[value],
+		
+		    // Converter a lista de usuários para um formato de tabela
+		    TabelaUsuarios = Table.FromList(DadosUsuarios, Splitter.SplitByNothing(), null, null, ExtraValues.Error)
+		in
+		    TabelaUsuarios
+	lineageTag: 99f94c89-dd30-4e08-8fcb-b4b9f70097f0
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Function
+
