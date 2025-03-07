@@ -1,10 +1,10 @@
-expression '(Fun01) Get Token' = ```
+expression '(Fun01) Get Token' =
 		let
 		    // Função para obter o token de acesso usando as credenciais armazenadas no arquivo JSON
 		    GetAccessToken = () =>
 		    let
 		        // Caminho absoluto para o arquivo de credenciais
-		        CredentialsFilePath = "C:\\Users\\natan\\OneDrive\\NtnLz\\Projetos\\UserEngagement\\UserEngagement.Credentials\\.pbi\\credentials.json", 
+		        CredentialsFilePath = "C:\\Users\\natan\\OneDrive\\NtnLz\\Projetos\\UsersEngagement\\UsersEngagement.Credentials\\.pbi\\credentials.json",
 		
 		        // Carrega as credenciais do arquivo JSON
 		        CredentialsJson = Json.Document(File.Contents(CredentialsFilePath)),
@@ -33,7 +33,6 @@ expression '(Fun01) Get Token' = ```
 		        AccessToken // Retorna o token de acesso
 		in
 		    GetAccessToken
-		```
 	lineageTag: 4ec0481a-21a4-4ca7-bef3-d1f6c89e2418
 
 	annotation PBI_NavigationStepName = Navegação
