@@ -1,0 +1,232 @@
+table '(Tab03) Get Datasets'
+	lineageTag: f7913b1b-0816-4f62-865f-9b3c669a7395
+
+	column Group_Id
+		dataType: string
+		lineageTag: c6116d7b-a157-4e19-8f15-f898dc685773
+		summarizeBy: none
+		sourceColumn: Group_Id
+
+		annotation SummarizationSetBy = Automatic
+
+	column Datasets_ContentProviderType
+		dataType: string
+		lineageTag: 3e6bdb25-0c27-470d-9c4c-cb851341175f
+		summarizeBy: none
+		sourceColumn: Datasets_ContentProviderType
+
+		annotation SummarizationSetBy = Automatic
+
+	column Datasets_CreateReportEmbedURL
+		dataType: string
+		lineageTag: c1416978-1c2d-475f-87e5-4ce63c8b305d
+		summarizeBy: none
+		sourceColumn: Datasets_CreateReportEmbedURL
+
+		annotation SummarizationSetBy = Automatic
+
+	column Datasets_CreatedDate
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 2864b833-1406-4919-8bb3-97839c82cfaa
+		summarizeBy: none
+		sourceColumn: Datasets_CreatedDate
+
+		annotation SummarizationSetBy = Automatic
+
+	column Datasets_Encryption
+		dataType: string
+		lineageTag: 961e6dab-951a-4600-a918-351230581646
+		summarizeBy: none
+		sourceColumn: Datasets_Encryption
+
+		annotation SummarizationSetBy = Automatic
+
+	column Datasets_IsEffectiveIdentityRequired
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 56103490-f177-4f5a-bcdc-e5bbefbcd29c
+		summarizeBy: none
+		sourceColumn: Datasets_IsEffectiveIdentityRequired
+
+		annotation SummarizationSetBy = Automatic
+
+	column Datasets_IsEffectiveIdentityRolesRequired
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: b01fc2ce-45f2-4f74-baa8-4118bb5d8ca8
+		summarizeBy: none
+		sourceColumn: Datasets_IsEffectiveIdentityRolesRequired
+
+		annotation SummarizationSetBy = Automatic
+
+	column Datasets_IsInPlaceSharingEnabled
+		dataType: string
+		lineageTag: 7346bc5a-f51c-46b3-91fe-bc84ad2fd9a9
+		summarizeBy: none
+		sourceColumn: Datasets_IsInPlaceSharingEnabled
+
+		annotation SummarizationSetBy = Automatic
+
+	column Datasets_IsOnPremGatewayRequired
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: ad55b844-5e6e-4b64-83a9-ea8bf00e3bb2
+		summarizeBy: none
+		sourceColumn: Datasets_IsOnPremGatewayRequired
+
+		annotation SummarizationSetBy = Automatic
+
+	column Datasets_IsRefreshable
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 1f8f0994-487d-461b-8081-2eb766f16e64
+		summarizeBy: none
+		sourceColumn: Datasets_IsRefreshable
+
+		annotation SummarizationSetBy = Automatic
+
+	column Datasets_QnaEmbedURL
+		dataType: string
+		lineageTag: 93bf282d-de80-477f-88ce-75fd02acf292
+		summarizeBy: none
+		sourceColumn: Datasets_QnaEmbedURL
+
+		annotation SummarizationSetBy = Automatic
+
+	column Datasets_AddRowsAPIEnabled
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 786e7c79-fa10-49c7-bd1b-67b32299b9b6
+		summarizeBy: none
+		sourceColumn: Datasets_AddRowsAPIEnabled
+
+		annotation SummarizationSetBy = Automatic
+
+	column Datasets_ConfiguredBy
+		dataType: string
+		lineageTag: 224f3121-b8ae-48bb-958f-c8e2b3ac6bce
+		summarizeBy: none
+		sourceColumn: Datasets_ConfiguredBy
+
+		annotation SummarizationSetBy = Automatic
+
+	column Datasets_Description
+		dataType: string
+		lineageTag: 382cdb46-a4b5-494e-8598-719cf26cbd43
+		summarizeBy: none
+		sourceColumn: Datasets_Description
+
+		annotation SummarizationSetBy = Automatic
+
+	column Datasets_Id
+		dataType: string
+		lineageTag: 20e67941-6e5b-4b5b-9123-fe2ff98e79a1
+		summarizeBy: none
+		sourceColumn: Datasets_Id
+
+		annotation SummarizationSetBy = Automatic
+
+	column Datasets_Name
+		dataType: string
+		lineageTag: 9fa0db8f-26d4-446f-8521-8f13d9311571
+		summarizeBy: none
+		sourceColumn: Datasets_Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column Datasets_AutoSyncReadOnlyReplicas
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 05d6102b-3dc2-46cb-9b64-39e032c2cfc5
+		summarizeBy: none
+		sourceColumn: Datasets_AutoSyncReadOnlyReplicas
+
+		annotation SummarizationSetBy = Automatic
+
+	column Datasets_MaxReadOnlyReplicas
+		dataType: int64
+		formatString: 0
+		lineageTag: 04273213-9c89-418b-9802-5b74c316c676
+		summarizeBy: sum
+		sourceColumn: Datasets_MaxReadOnlyReplicas
+
+		annotation SummarizationSetBy = Automatic
+
+	column Datasets_TargetStorageMode
+		dataType: string
+		lineageTag: f43339a9-f61a-4ea0-9f68-7ac6918307cb
+		summarizeBy: none
+		sourceColumn: Datasets_TargetStorageMode
+
+		annotation SummarizationSetBy = Automatic
+
+	column Datasets_UpstreamDataflows
+		dataType: string
+		lineageTag: 58c92dbc-fe87-44b4-9200-cc7ed3f813f6
+		summarizeBy: none
+		sourceColumn: Datasets_UpstreamDataflows
+
+		annotation SummarizationSetBy = Automatic
+
+	column Datasets_WebUrl
+		dataType: string
+		lineageTag: 74dcf220-abb0-4ac6-8e14-8e6c62d9f425
+		summarizeBy: none
+		sourceColumn: Datasets_WebUrl
+
+		annotation SummarizationSetBy = Automatic
+
+	partition '(Tab03) Get Datasets' = m
+		mode: import
+		source = ```
+				let
+				    // Fonte de dados: obtenção de grupos
+				    Source = #"(Tab01) Get Groups",
+				
+				    // Seleção de apenas a coluna "Group_Id"
+				    #"Removed Other Columns" = Table.SelectColumns(Source, {"Group_Id"}),
+				
+				    // Adiciona coluna para invocar a função de obter datasets
+				    #"Invoked Custom Function" = Table.AddColumn(#"Removed Other Columns", "(Fun) Get Datasets", each #"(Fun03) Get Datasets"([Group_Id])),
+				
+				    // Expande a coluna de datasets
+				    #"Expanded (Fun) Get Datasets" = Table.ExpandTableColumn(#"Invoked Custom Function", "(Fun) Get Datasets", {"Column1"}, {"Column1"}),
+				
+				    // Expande as colunas de datasets
+				    #"Expanded Column1" = Table.ExpandRecordColumn(#"Expanded (Fun) Get Datasets", "Column1",
+				        {"contentProviderType", "createReportEmbedURL", "createdDate", "encryption", "isEffectiveIdentityRequired", "isEffectiveIdentityRolesRequired", "isInPlaceSharingEnabled", "isOnPremGatewayRequired", "isRefreshable", "qnaEmbedURL", "addRowsAPIEnabled", "configuredBy", "description", "id", "name", "queryScaleOutSettings", "targetStorageMode", "upstreamDataflows", "webUrl"},
+				        {"Datasets_ContentProviderType", "Datasets_CreateReportEmbedURL", "Datasets_CreatedDate", "Datasets_Encryption", "Datasets_IsEffectiveIdentityRequired", "Datasets_IsEffectiveIdentityRolesRequired", "Datasets_IsInPlaceSharingEnabled", "Datasets_IsOnPremGatewayRequired", "Datasets_IsRefreshable", "Datasets_QnaEmbedURL", "Datasets_AddRowsAPIEnabled", "Datasets_ConfiguredBy", "Datasets_Description", "Datasets_Id", "Datasets_Name", "Datasets_QueryScaleOutSettings", "Datasets_TargetStorageMode", "Datasets_UpstreamDataflows", "Datasets_WebUrl"}),
+				    #"Expanded Datasets_QueryScaleOutSettings" = Table.ExpandRecordColumn(#"Expanded Column1", "Datasets_QueryScaleOutSettings", {"autoSyncReadOnlyReplicas", "maxReadOnlyReplicas"}, {"Datasets_AutoSyncReadOnlyReplicas", "Datasets_MaxReadOnlyReplicas"}),
+				    // Ajusta os tipos das colunas
+				    #"Changed Type" = Table.TransformColumnTypes(#"Expanded Datasets_QueryScaleOutSettings", {
+				        {"Group_Id", type text}, 
+				        {"Datasets_ContentProviderType", type any}, 
+				        {"Datasets_CreateReportEmbedURL", type text}, 
+				        {"Datasets_CreatedDate", type datetime}, 
+				        {"Datasets_Encryption", type any}, 
+				        {"Datasets_IsEffectiveIdentityRequired", type logical}, 
+				        {"Datasets_IsEffectiveIdentityRolesRequired", type logical}, 
+				        {"Datasets_IsInPlaceSharingEnabled", type any}, 
+				        {"Datasets_IsOnPremGatewayRequired", type logical}, 
+				        {"Datasets_IsRefreshable", type logical}, 
+				        {"Datasets_QnaEmbedURL", type text}, 
+				        {"Datasets_AddRowsAPIEnabled", type logical}, 
+				        {"Datasets_ConfiguredBy", type text}, 
+				        {"Datasets_Description", type any}, 
+				        {"Datasets_Id", type text}, 
+				        {"Datasets_Name", type text}, 
+				        {"Datasets_AutoSyncReadOnlyReplicas", type logical}, 
+				        {"Datasets_MaxReadOnlyReplicas", Int64.Type}, 
+				        {"Datasets_TargetStorageMode", type text}, 
+				        {"Datasets_UpstreamDataflows", type any}, 
+				        {"Datasets_WebUrl", type text}
+				    })
+				in
+				    #"Changed Type"
+				```
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+
