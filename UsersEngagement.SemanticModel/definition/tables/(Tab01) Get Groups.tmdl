@@ -1,0 +1,125 @@
+table '(Tab01) Get Groups'
+	lineageTag: 68bd421c-522d-4e25-aec6-741ebf9a5489
+
+	column Group_CapacityId
+		dataType: string
+		lineageTag: 4f7acab4-89c5-45e5-a49a-4e87878e1c1a
+		summarizeBy: none
+		sourceColumn: Group_CapacityId
+
+		annotation SummarizationSetBy = Automatic
+
+	column Group_DataflowStorageId
+		dataType: string
+		lineageTag: ca05bbc4-9bc1-4961-9b84-203d09d873a9
+		summarizeBy: none
+		sourceColumn: Group_DataflowStorageId
+
+		annotation SummarizationSetBy = Automatic
+
+	column Group_DefaultDatasetStorageFormat
+		dataType: string
+		lineageTag: 92df5394-f7f5-464e-a17a-575a6bbcfe13
+		summarizeBy: none
+		sourceColumn: Group_DefaultDatasetStorageFormat
+
+		annotation SummarizationSetBy = Automatic
+
+	column Group_Id
+		dataType: string
+		lineageTag: d4a5278f-62d2-40b4-a95f-e5bb61a9defd
+		summarizeBy: none
+		sourceColumn: Group_Id
+
+		annotation SummarizationSetBy = Automatic
+
+	column Group_IsOnDedicatedCapacity
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 3dbc5851-2976-4eec-86a7-36c1a7094d52
+		summarizeBy: none
+		sourceColumn: Group_IsOnDedicatedCapacity
+
+		annotation SummarizationSetBy = Automatic
+
+	column Group_IsReadOnly
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 0fc9ab79-368e-4aa0-ab41-981d9497c6a8
+		summarizeBy: none
+		sourceColumn: Group_IsReadOnly
+
+		annotation SummarizationSetBy = Automatic
+
+	column Group_LogAnalyticsWorkspace
+		dataType: string
+		lineageTag: 89a057c5-dcbf-4cab-89b6-b8aac1d6763d
+		summarizeBy: none
+		sourceColumn: Group_LogAnalyticsWorkspace
+
+		annotation SummarizationSetBy = Automatic
+
+	column Group_Name
+		dataType: string
+		lineageTag: 2264161f-da69-4ddd-a5ae-7f2b129c5397
+		summarizeBy: none
+		sourceColumn: Group_Name
+
+		annotation SummarizationSetBy = Automatic
+
+	partition '(Tab01) Get Groups' = m
+		mode: import
+		source =
+				let
+				    // Função para recuperar o token de acesso usando GetAccessToken
+				    TokenDeAcesso = #"(Fun01) Get Token"(),
+				
+				    // Define o endpoint da API do Power BI para listar os grupos
+				    EndpointPowerBi = "https://api.powerbi.com/v1.0/myorg/groups?$top=1000",
+				
+				    // Enviar uma requisição GET para a API do Power BI, incluindo o token de acesso para autorização
+				    RespostaApi = Json.Document(Web.Contents(EndpointPowerBi, [
+				        Headers = [#"Authorization" = "Bearer " & TokenDeAcesso]
+				    ])),
+				
+				    // Extrair a lista de grupos da resposta da API
+				    DadosGrupos = RespostaApi[value],
+				
+				    // Converter a lista de grupos para um formato de tabela
+				    TabelaGrupos = Table.FromList(DadosGrupos, Splitter.SplitByNothing(), null, null, ExtraValues.Error),
+				
+				    // Expandir as colunas para incluir os campos desejados
+				    #"Expanded Column1" = Table.ExpandRecordColumn(TabelaGrupos, "Column1",
+				        {"capacityId", "dataflowStorageId", "defaultDatasetStorageFormat", "id", "isOnDedicatedCapacity", "isReadOnly", "logAnalyticsWorkspace", "name"},
+				        {"capacityId", "dataflowStorageId", "defaultDatasetStorageFormat", "id", "isOnDedicatedCapacity", "isReadOnly", "logAnalyticsWorkspace", "name"}),
+				
+				    // Renomear as colunas para nomes mais compreensíveis
+				    #"Renamed Columns" = Table.RenameColumns(#"Expanded Column1", {
+				        {"capacityId", "Group_CapacityId"},
+				        {"dataflowStorageId", "Group_DataflowStorageId"},
+				        {"defaultDatasetStorageFormat", "Group_DefaultDatasetStorageFormat"},
+				        {"id", "Group_Id"},
+				        {"isOnDedicatedCapacity", "Group_IsOnDedicatedCapacity"},
+				        {"isReadOnly", "Group_IsReadOnly"},
+				        {"logAnalyticsWorkspace", "Group_LogAnalyticsWorkspace"},
+				        {"name", "Group_Name"}
+				    }),
+				
+				    // Alterar tipos de dados conforme necessário
+				    #"Changed Type" = Table.TransformColumnTypes(#"Renamed Columns", {
+				        {"Group_CapacityId", type text},
+				        {"Group_DataflowStorageId", type any},
+				        {"Group_DefaultDatasetStorageFormat", type text},
+				        {"Group_Id", type text},
+				        {"Group_IsOnDedicatedCapacity", type logical},
+				        {"Group_IsReadOnly", type logical},
+				        {"Group_LogAnalyticsWorkspace", type any},
+				        {"Group_Name", type text}
+				    })
+				in
+				    #"Changed Type"
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+
