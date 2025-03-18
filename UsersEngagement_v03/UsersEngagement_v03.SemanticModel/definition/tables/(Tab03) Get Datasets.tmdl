@@ -1,0 +1,173 @@
+table '(Tab03) Get Datasets'
+	lineageTag: f7913b1b-0816-4f62-865f-9b3c669a7395
+
+	column Group_Id
+		dataType: string
+		lineageTag: c6116d7b-a157-4e19-8f15-f898dc685773
+		summarizeBy: none
+		sourceColumn: Group_Id
+
+		annotation SummarizationSetBy = Automatic
+
+	column Dataset_Id
+		dataType: string
+		lineageTag: 950d768c-06c8-4bb4-ab43-7da5776fe2ae
+		summarizeBy: none
+		sourceColumn: Dataset_Id
+
+		annotation SummarizationSetBy = Automatic
+
+	column Dataset_Name
+		dataType: string
+		lineageTag: 6868e541-6806-4dcb-9062-93889ceca831
+		summarizeBy: none
+		sourceColumn: Dataset_Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column Dataset_WebUrl
+		dataType: string
+		lineageTag: df438fcc-79b1-40cd-a05f-60d0a7fe7381
+		summarizeBy: none
+		sourceColumn: Dataset_WebUrl
+
+		annotation SummarizationSetBy = Automatic
+
+	column Dataset_AddRowsAPIEnabled
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: ed5e56ad-6937-4571-992f-040dc14fb4d2
+		summarizeBy: none
+		sourceColumn: Dataset_AddRowsAPIEnabled
+
+		annotation SummarizationSetBy = Automatic
+
+	column Dataset_ConfiguredBy
+		dataType: string
+		lineageTag: 756709c0-d2ef-454d-b4f9-6247086065cc
+		summarizeBy: none
+		sourceColumn: Dataset_ConfiguredBy
+
+		annotation SummarizationSetBy = Automatic
+
+	column Dataset_IsRefreshable
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 4afc2ea0-3b7d-44ec-b10b-d72717513166
+		summarizeBy: none
+		sourceColumn: Dataset_IsRefreshable
+
+		annotation SummarizationSetBy = Automatic
+
+	column Dataset_IsEffectiveIdentityRequired
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 6ce58e31-9c13-4962-a643-8159290afa77
+		summarizeBy: none
+		sourceColumn: Dataset_IsEffectiveIdentityRequired
+
+		annotation SummarizationSetBy = Automatic
+
+	column Dataset_IsEffectiveIdentityRolesRequired
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 15f8c90f-3d9c-4ca0-a20e-69443e5e5775
+		summarizeBy: none
+		sourceColumn: Dataset_IsEffectiveIdentityRolesRequired
+
+		annotation SummarizationSetBy = Automatic
+
+	column Dataset_IsOnPremGatewayRequired
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: cd4ab424-e726-4e51-b3e9-1d91361681fd
+		summarizeBy: none
+		sourceColumn: Dataset_IsOnPremGatewayRequired
+
+		annotation SummarizationSetBy = Automatic
+
+	column Dataset_TargetStorageMode
+		dataType: string
+		lineageTag: 2842e0db-627a-49f2-884a-6cc6079776b6
+		summarizeBy: none
+		sourceColumn: Dataset_TargetStorageMode
+
+		annotation SummarizationSetBy = Automatic
+
+	column Dataset_CreatedDate
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: b63cc585-f4f8-4e85-8958-60db26f4d25e
+		summarizeBy: none
+		sourceColumn: Dataset_CreatedDate
+
+		annotation SummarizationSetBy = Automatic
+
+	column Dataset_CreateReportEmbedURL
+		dataType: string
+		lineageTag: 6afd2675-465c-46a7-ba34-9c808543b767
+		summarizeBy: none
+		sourceColumn: Dataset_CreateReportEmbedURL
+
+		annotation SummarizationSetBy = Automatic
+
+	column Dataset_QnaEmbedURL
+		dataType: string
+		lineageTag: a383314f-e81d-4406-a7a9-362b3fdbdef1
+		summarizeBy: none
+		sourceColumn: Dataset_QnaEmbedURL
+
+		annotation SummarizationSetBy = Automatic
+
+	column Dataset_UpstreamDatasets
+		dataType: string
+		lineageTag: a440546c-ba63-492d-85bd-94f20fe2e9e8
+		summarizeBy: none
+		sourceColumn: Dataset_UpstreamDatasets
+
+		annotation SummarizationSetBy = Automatic
+
+	column Dataset_Users
+		dataType: string
+		lineageTag: 7ba47b85-83d4-43b4-b059-60142afc7d84
+		summarizeBy: none
+		sourceColumn: Dataset_Users
+
+		annotation SummarizationSetBy = Automatic
+
+	column Dataset_QueryScaleOutSettings
+		dataType: string
+		lineageTag: 59a5fce3-71d1-4e6f-9c85-86b971700d98
+		summarizeBy: none
+		sourceColumn: Dataset_QueryScaleOutSettings
+
+		annotation SummarizationSetBy = Automatic
+
+	partition '(Tab03) Get Datasets' = m
+		mode: import
+		source = ```
+				let
+				    // Obtém os grupos
+				    FonteGrupos = #"(Tab01) Get Groups",
+				
+				    // Mantém apenas a coluna Group_Id
+				    GruposSelecionados = Table.SelectColumns(FonteGrupos, {"Group_Id"}),
+				
+				    // Chama a função para obter datasets
+				    DatasetsAdicionados = Table.AddColumn(GruposSelecionados, "Datasets", each #"(Fun03) Get Datasets"([Group_Id])),
+				    DatasetsExpandidos = Table.ExpandTableColumn(DatasetsAdicionados, "Datasets", {"Column1"}),
+				
+				    // Expande todas as colunas dos datasets
+				    ColunasExpandidas = Table.ExpandRecordColumn(DatasetsExpandidos, "Column1", 
+				        {"id", "name", "webUrl", "addRowsAPIEnabled", "configuredBy", "isRefreshable", "isEffectiveIdentityRequired", "isEffectiveIdentityRolesRequired", "isOnPremGatewayRequired", "targetStorageMode", "createdDate", "createReportEmbedURL", "qnaEmbedURL", "upstreamDatasets", "users", "queryScaleOutSettings"},
+				        {"Dataset_Id", "Dataset_Name", "Dataset_WebUrl", "Dataset_AddRowsAPIEnabled", "Dataset_ConfiguredBy", "Dataset_IsRefreshable", "Dataset_IsEffectiveIdentityRequired", "Dataset_IsEffectiveIdentityRolesRequired", "Dataset_IsOnPremGatewayRequired", "Dataset_TargetStorageMode", "Dataset_CreatedDate", "Dataset_CreateReportEmbedURL", "Dataset_QnaEmbedURL", "Dataset_UpstreamDatasets", "Dataset_Users", "Dataset_QueryScaleOutSettings"}
+				    ),
+				    TipoAlterado = Table.TransformColumnTypes(ColunasExpandidas,{{"Group_Id", type text}, {"Dataset_Id", type text}, {"Dataset_Name", type text}, {"Dataset_WebUrl", type text}, {"Dataset_AddRowsAPIEnabled", type logical}, {"Dataset_ConfiguredBy", type text}, {"Dataset_IsRefreshable", type logical}, {"Dataset_IsEffectiveIdentityRequired", type logical}, {"Dataset_IsEffectiveIdentityRolesRequired", type logical}, {"Dataset_IsOnPremGatewayRequired", type logical}, {"Dataset_TargetStorageMode", type text}, {"Dataset_CreatedDate", type datetime}, {"Dataset_CreateReportEmbedURL", type text}, {"Dataset_QnaEmbedURL", type text}, {"Dataset_UpstreamDatasets", type any}, {"Dataset_Users", type any}, {"Dataset_QueryScaleOutSettings", type any}})
+				in
+				    TipoAlterado
+				```
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+
