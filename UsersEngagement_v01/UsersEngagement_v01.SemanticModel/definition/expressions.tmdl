@@ -1,0 +1,62 @@
+expression '(Fun01) Get Token' =
+		let
+		    // Função para obter o token de acesso
+		    ObterTokenAcesso = () =>
+		    let
+		        // Credenciais fixas
+		        IdLocatario = "***********************",
+		        IdCliente = "***********************",
+		        SegredoCliente = "***********************",
+		
+		        // URL para obter o token
+		        UrlToken = "https://login.microsoftonline.com/" & IdLocatario & "/oauth2/v2.0/token",
+		
+		        // Parâmetros da requisição
+		        DadosRequisicao = "grant_type=client_credentials&client_id=" & IdCliente & "&client_secret=" & SegredoCliente & "&scope=https://analysis.windows.net/powerbi/api/.default",
+		
+		        // Chamada da API
+		        RespostaApi = Web.Contents(UrlToken, [
+		            Content = Text.ToBinary(DadosRequisicao),
+		            Headers = [#"Content-Type"="application/x-www-form-urlencoded"]
+		        ]),
+		
+		        // Extrai o token de acesso
+		        JsonToken = Json.Document(RespostaApi),
+		        TokenAcesso = JsonToken[access_token]
+		    in
+		        TokenAcesso
+		in
+		    ObterTokenAcesso
+	lineageTag: 4ec0481a-21a4-4ca7-bef3-d1f6c89e2418
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Function
+
+expression '(Fun02) Get Reports' =
+		(GroupId as text) =>
+		let
+		    // Obtém o token de acesso
+		    TokenAcesso = #"(Fun01) Get Token"(),
+		
+		    // Define URL da API para listar relatórios
+		    UrlRelatorios = "https://api.powerbi.com/v1.0/myorg/groups/" & GroupId & "/reports",
+		
+		    // Requisição GET na API
+		    RespostaApi = Json.Document(Web.Contents(UrlRelatorios, [
+		        Headers = [#"Authorization" = "Bearer " & TokenAcesso]
+		    ])),
+		
+		    // Extrai lista de relatórios
+		    ListaRelatorios = RespostaApi[value],
+		
+		    // Converte lista para tabela
+		    TabelaRelatorios = Table.FromList(ListaRelatorios, Splitter.SplitByNothing(), null, null, ExtraValues.Error)
+		in
+		    TabelaRelatorios
+	lineageTag: 3191f12d-4bf9-4c3c-97d6-4955e31c01ba
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Function
+
