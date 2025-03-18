@@ -1,0 +1,154 @@
+expression '(Fun01) Get Token' =
+		let
+		    // Obtém o token de acesso usando as credenciais armazenadas no arquivo JSON
+		    ObterTokenAcesso = () =>
+		    let
+		        // Caminho para o arquivo de credenciais
+		        CaminhoCredenciais = "C:\\Users\\natan\\OneDrive\\NtnLz\\Projetos\\UsersEngagement\\UsersEngagement.Credentials\\.pbi\\credentials.json",
+		
+		        // Carrega credenciais do JSON
+		        JsonCredenciais = Json.Document(File.Contents(CaminhoCredenciais)),
+		
+		        // Extrai credenciais do JSON
+		        IdLocatario = JsonCredenciais[TenantId],
+		        IdCliente = JsonCredenciais[ClientId],
+		        SegredoCliente = JsonCredenciais[ClientSecret],
+		
+		        // URL do token
+		        UrlToken = "https://login.microsoftonline.com/" & IdLocatario & "/oauth2/v2.0/token",
+		
+		        // Parâmetros para solicitar o token
+		        DadosRequisicao = "grant_type=client_credentials&client_id=" & IdCliente & "&client_secret=" & SegredoCliente & "&scope=https://analysis.windows.net/powerbi/api/.default",
+		
+		        // Requisição para obter o token
+		        RespostaApi = Web.Contents(UrlToken, [
+		            Content = Text.ToBinary(DadosRequisicao),
+		            Headers = [#"Content-Type"="application/x-www-form-urlencoded"]
+		        ]),
+		
+		        // Extrai o token da resposta
+		        JsonToken = Json.Document(RespostaApi),
+		        TokenAcesso = JsonToken[access_token]
+		    in
+		        TokenAcesso
+		in
+		    ObterTokenAcesso
+	lineageTag: 4ec0481a-21a4-4ca7-bef3-d1f6c89e2418
+	queryGroup: Funções
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Function
+
+expression '(Fun02) Get Reports' =
+		(IdGrupo as text) =>
+		let
+		    // Obtém o token de acesso
+		    TokenAcesso = #"(Fun01) Get Token"(),
+		
+		    // Define URL da API para listar relatórios
+		    UrlRelatorios = "https://api.powerbi.com/v1.0/myorg/groups/" & IdGrupo & "/reports",
+		
+		    // Requisição GET para a API
+		    RespostaApi = Json.Document(Web.Contents(UrlRelatorios, [
+		        Headers = [#"Authorization" = "Bearer " & TokenAcesso]
+		    ])),
+		
+		    // Extrai lista de relatórios
+		    ListaRelatorios = RespostaApi[value],
+		
+		    // Converte lista para tabela
+		    TabelaRelatorios = Table.FromList(ListaRelatorios, Splitter.SplitByNothing(), null, null, ExtraValues.Error)
+		in
+		    TabelaRelatorios
+	lineageTag: 3191f12d-4bf9-4c3c-97d6-4955e31c01ba
+	queryGroup: Funções
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Function
+
+expression '(Fun03) Get Datasets' =
+		(IdGrupo as text) =>
+		let
+		    // Obtém o token de acesso
+		    TokenAcesso = #"(Fun01) Get Token"(),
+		
+		    // Define URL da API para listar datasets
+		    UrlDatasets = "https://api.powerbi.com/v1.0/myorg/groups/" & IdGrupo & "/datasets",
+		
+		    // Requisição GET para a API
+		    RespostaApi = Json.Document(Web.Contents(UrlDatasets, [
+		        Headers = [#"Authorization" = "Bearer " & TokenAcesso]
+		    ])),
+		
+		    // Extrai lista de datasets
+		    ListaDatasets = RespostaApi[value],
+		
+		    // Converte lista para tabela
+		    TabelaDatasets = Table.FromList(ListaDatasets, Splitter.SplitByNothing(), null, null, ExtraValues.Error)
+		in
+		    TabelaDatasets
+	lineageTag: 59ec6a1d-8ce4-463c-82ed-f94794df69ef
+	queryGroup: Funções
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Function
+
+expression '(Fun04) Get Dataflows' =
+		(IdGrupo as text) =>
+		let
+		    // Obtém o token de acesso
+		    TokenAcesso = #"(Fun01) Get Token"(),
+		
+		    // Define URL da API para listar dataflows
+		    UrlDataflows = "https://api.powerbi.com/v1.0/myorg/groups/" & IdGrupo & "/dataflows",
+		
+		    // Requisição GET para a API
+		    RespostaApi = Json.Document(Web.Contents(UrlDataflows, [
+		        Headers = [#"Authorization" = "Bearer " & TokenAcesso]
+		    ])),
+		
+		    // Extrai lista de dataflows
+		    ListaDataflows = RespostaApi[value],
+		
+		    // Converte lista para tabela
+		    TabelaDataflows = Table.FromList(ListaDataflows, Splitter.SplitByNothing(), null, null, ExtraValues.Error)
+		in
+		    TabelaDataflows
+	lineageTag: 978db77c-8bbc-4144-8da3-80f6fe6abf15
+	queryGroup: Funções
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Function
+
+expression '(Fun05) Get Users' =
+		(IdGrupo as text) =>
+		let
+		    // Obtém o token de acesso
+		    TokenAcesso = #"(Fun01) Get Token"(),
+		
+		    // Define URL da API para listar usuários
+		    UrlUsuarios = "https://api.powerbi.com/v1.0/myorg/groups/" & IdGrupo & "/users",
+		
+		    // Requisição GET para a API
+		    RespostaApi = Json.Document(Web.Contents(UrlUsuarios, [
+		        Headers = [#"Authorization" = "Bearer " & TokenAcesso]
+		    ])),
+		
+		    // Extrai lista de usuários
+		    ListaUsuarios = RespostaApi[value],
+		
+		    // Converte lista para tabela
+		    TabelaUsuarios = Table.FromList(ListaUsuarios, Splitter.SplitByNothing(), null, null, ExtraValues.Error)
+		in
+		    TabelaUsuarios
+	lineageTag: 99f94c89-dd30-4e08-8fcb-b4b9f70097f0
+	queryGroup: Funções
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Function
+
