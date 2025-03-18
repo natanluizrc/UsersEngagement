@@ -1,0 +1,118 @@
+table '(Tab02) Get Reports'
+	lineageTag: 54a859e3-bfd7-4b94-8fac-e3d944499c43
+
+	column Group_Id
+		dataType: string
+		lineageTag: a952387a-e894-45a7-9f01-4402d03b94df
+		summarizeBy: none
+		sourceColumn: Group_Id
+
+		annotation SummarizationSetBy = Automatic
+
+	column Report_AppId
+		dataType: string
+		lineageTag: 5a14333c-1f3d-42a1-8217-83899e184410
+		summarizeBy: none
+		sourceColumn: Report_AppId
+
+		annotation SummarizationSetBy = Automatic
+
+	column Report_DatasetId
+		dataType: string
+		lineageTag: c1b259ae-f085-448a-b545-1275970bad32
+		summarizeBy: none
+		sourceColumn: Report_DatasetId
+
+		annotation SummarizationSetBy = Automatic
+
+	column Report_Description
+		dataType: string
+		lineageTag: c317c1c5-7a34-4f47-ac8f-5b81e20c35f1
+		summarizeBy: none
+		sourceColumn: Report_Description
+
+		annotation SummarizationSetBy = Automatic
+
+	column Report_EmbedUrl
+		dataType: string
+		lineageTag: d32bd647-3c29-4b89-9768-2c8a8b90f568
+		summarizeBy: none
+		sourceColumn: Report_EmbedUrl
+
+		annotation SummarizationSetBy = Automatic
+
+	column Report_Id
+		dataType: string
+		lineageTag: 4bc8dca4-9bba-41fe-a0e6-ece70fe28f6c
+		summarizeBy: none
+		sourceColumn: Report_Id
+
+		annotation SummarizationSetBy = Automatic
+
+	column Report_IsOwnedByMe
+		dataType: string
+		lineageTag: eb635345-b0e7-4924-88be-9cf72cd4be02
+		summarizeBy: none
+		sourceColumn: Report_IsOwnedByMe
+
+		annotation SummarizationSetBy = Automatic
+
+	column Report_Name
+		dataType: string
+		lineageTag: 99e1c107-fd3b-4d64-acb7-9e0a5befd7dc
+		summarizeBy: none
+		sourceColumn: Report_Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column Report_OriginalReportId
+		dataType: string
+		lineageTag: 4c683706-53d4-418d-a0f5-55be41facd23
+		summarizeBy: none
+		sourceColumn: Report_OriginalReportId
+
+		annotation SummarizationSetBy = Automatic
+
+	column Report_Type
+		dataType: string
+		lineageTag: 297f20e5-0e4b-4f56-853b-52b387406878
+		summarizeBy: none
+		sourceColumn: Report_Type
+
+		annotation SummarizationSetBy = Automatic
+
+	column Report_WebUrl
+		dataType: string
+		lineageTag: af4bb36c-74e1-4268-a504-946a0b95bf95
+		summarizeBy: none
+		sourceColumn: Report_WebUrl
+
+		annotation SummarizationSetBy = Automatic
+
+	partition '(Tab02) Get Reports' = m
+		mode: import
+		source = ```
+				let
+				    // Obtém os grupos
+				    FonteGrupos = #"(Tab01) Get Groups",
+				    
+				    // Mantém apenas a coluna Group_Id
+				    GruposSelecionados = Table.SelectColumns(FonteGrupos, {"Group_Id"}),
+				
+				    // Chama a função para obter relatórios
+				    RelatoriosAdicionados = Table.AddColumn(GruposSelecionados, "Reports", each #"(Fun02) Get Reports"([Group_Id])),
+				    RelatoriosExpandidos = Table.ExpandTableColumn(RelatoriosAdicionados, "Reports", {"Column1"}),
+				
+				    // Expande todas as colunas dos relatórios
+				    ColunasExpandidas = Table.ExpandRecordColumn(RelatoriosExpandidos, "Column1", 
+				        {"appId", "datasetId", "description", "embedUrl", "id", "isOwnedByMe", "name", "originalReportId", "reportType", "webUrl"},
+				        {"Report_AppId", "Report_DatasetId", "Report_Description", "Report_EmbedUrl", "Report_Id", "Report_IsOwnedByMe", "Report_Name", "Report_OriginalReportId", "Report_Type", "Report_WebUrl"}
+				    )
+				in
+				    ColunasExpandidas
+				```
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navegação
+
