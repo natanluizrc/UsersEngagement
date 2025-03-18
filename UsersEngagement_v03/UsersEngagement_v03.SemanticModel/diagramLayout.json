@@ -1,0 +1,120 @@
+{
+  "version": "1.1.0",
+  "diagrams": [
+    {
+      "ordinal": 0,
+      "scrollPosition": {
+        "x": 0,
+        "y": 0
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 300.07289293849675,
+            "y": 182.22551252847376
+          },
+          "nodeIndex": "(Tab01) Get Groups",
+          "nodeLineageTag": "68bd421c-522d-4e25-aec6-741ebf9a5489",
+          "size": {
+            "height": 104,
+            "width": 234
+          },
+          "zIndex": 0,
+          "expandedHeight": 272
+        },
+        {
+          "location": {
+            "x": 0,
+            "y": 0
+          },
+          "nodeIndex": "(Tab00) Measures",
+          "nodeLineageTag": "636080c4-9f73-469a-a024-83dd7415e773",
+          "size": {
+            "height": 72,
+            "width": 234
+          },
+          "zIndex": 0,
+          "expandedHeight": 104
+        },
+        {
+          "location": {
+            "x": 577.30296127562644,
+            "y": 0
+          },
+          "nodeIndex": "(Tab02) Get Reports",
+          "nodeLineageTag": "cc888daa-6afd-4f46-8736-bf9b28c627f7",
+          "size": {
+            "height": 104,
+            "width": 234
+          },
+          "zIndex": 0,
+          "expandedHeight": 300
+        },
+        {
+          "location": {
+            "x": 577.51252847380408,
+            "y": 122.07744874715263
+          },
+          "nodeIndex": "(Tab03) Get Datasets",
+          "nodeLineageTag": "f7913b1b-0816-4f62-865f-9b3c669a7395",
+          "size": {
+            "height": 104,
+            "width": 234
+          },
+          "zIndex": 0,
+          "expandedHeight": 300
+        },
+        {
+          "location": {
+            "x": 579.30751708428238,
+            "y": 244.10478359908882
+          },
+          "nodeIndex": "(Tab04) Get Dataflows",
+          "nodeLineageTag": "0e131249-c39f-428d-bd29-54f4dfdbe6f9",
+          "size": {
+            "height": 104,
+            "width": 234
+          },
+          "zIndex": 0,
+          "expandedHeight": 224
+        },
+        {
+          "location": {
+            "x": 577.93166287015947,
+            "y": 368.66970387243731
+          },
+          "nodeIndex": "(Tab05) Get Users",
+          "nodeLineageTag": "e481cd53-c30b-40f1-b95a-df6461ea5221",
+          "size": {
+            "height": 104,
+            "width": 234
+          },
+          "zIndex": 0,
+          "expandedHeight": 200
+        },
+        {
+          "location": {
+            "x": 0,
+            "y": 182.15261958997718
+          },
+          "nodeIndex": "(Tab06) Get Activity Events",
+          "nodeLineageTag": "415e555b-6f37-4022-a7a0-ee04a52643b4",
+          "size": {
+            "height": 104,
+            "width": 234
+          },
+          "zIndex": 0,
+          "expandedHeight": 300
+        }
+      ],
+      "name": "Todas as tabelas",
+      "zoomValue": 100,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    }
+  ],
+  "selectedDiagram": "Todas as tabelas",
+  "defaultDiagram": "Todas as tabelas"
+}
