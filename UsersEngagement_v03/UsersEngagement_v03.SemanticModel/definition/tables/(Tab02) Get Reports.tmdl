@@ -1,0 +1,138 @@
+table '(Tab02) Get Reports'
+	lineageTag: cc888daa-6afd-4f46-8736-bf9b28c627f7
+
+	column Group_Id
+		dataType: string
+		lineageTag: c3a0985a-fd21-42c3-9af7-25a52548e56a
+		summarizeBy: none
+		sourceColumn: Group_Id
+
+		annotation SummarizationSetBy = Automatic
+
+	column Report_DatasetId
+		dataType: string
+		lineageTag: 806c11ec-8288-40e7-a1e6-a7b9f69a2f57
+		summarizeBy: none
+		sourceColumn: Report_DatasetId
+
+		annotation SummarizationSetBy = Automatic
+
+	column Report_EmbedUrl
+		dataType: string
+		lineageTag: 0c6e73bf-2297-4846-9bcc-6567c24f3d77
+		summarizeBy: none
+		sourceColumn: Report_EmbedUrl
+
+		annotation SummarizationSetBy = Automatic
+
+	column Report_Id
+		dataType: string
+		lineageTag: 74c6fa50-28ec-425f-95cb-110ac0ab79e8
+		summarizeBy: none
+		sourceColumn: Report_Id
+
+		annotation SummarizationSetBy = Automatic
+
+	column Report_IsOwnedByMe
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 87f9a740-d300-4971-a7b4-04ac93ce1795
+		summarizeBy: none
+		sourceColumn: Report_IsOwnedByMe
+
+		annotation SummarizationSetBy = Automatic
+
+	column Report_Name
+		dataType: string
+		lineageTag: 5a566142-3f5c-49c2-8544-5de72f6b8ed5
+		summarizeBy: none
+		sourceColumn: Report_Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column Report_WebUrl
+		dataType: string
+		lineageTag: 03f99ce0-9710-47d5-9ba7-a9d20f9d5056
+		summarizeBy: none
+		sourceColumn: Report_WebUrl
+
+		annotation SummarizationSetBy = Automatic
+
+	column Report_Type
+		dataType: string
+		lineageTag: 81d10399-b701-4288-b190-374d3c389076
+		summarizeBy: none
+		sourceColumn: Report_Type
+
+		annotation SummarizationSetBy = Automatic
+
+	column Report_IsFromPbix
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 51cdb318-e3f8-4632-a126-843f7367695b
+		summarizeBy: none
+		sourceColumn: Report_IsFromPbix
+
+		annotation SummarizationSetBy = Automatic
+
+	column Report_DatasetWorkspaceId
+		dataType: string
+		lineageTag: b880a158-c723-4388-967d-96f2632d3511
+		summarizeBy: none
+		sourceColumn: Report_DatasetWorkspaceId
+
+		annotation SummarizationSetBy = Automatic
+
+	column Report_Users
+		dataType: string
+		lineageTag: 0d71beb0-5be4-4483-bbc5-a61e0e838825
+		summarizeBy: none
+		sourceColumn: Report_Users
+
+		annotation SummarizationSetBy = Automatic
+
+	column Report_Subscriptions
+		dataType: string
+		lineageTag: 7d0f38c7-c569-49f3-bc03-d8dd5c70c1f4
+		summarizeBy: none
+		sourceColumn: Report_Subscriptions
+
+		annotation SummarizationSetBy = Automatic
+
+	column Report_Flags
+		dataType: int64
+		formatString: 0
+		lineageTag: 50b12d77-1f51-4c05-b26b-cfecf4dc6f9e
+		summarizeBy: sum
+		sourceColumn: Report_Flags
+
+		annotation SummarizationSetBy = Automatic
+
+	partition '(Tab02) Get Reports' = m
+		mode: import
+		source = ```
+				let
+				    // Obtém os grupos
+				    FonteGrupos = #"(Tab01) Get Groups",
+				
+				    // Mantém apenas a coluna Group_Id
+				    GruposSelecionados = Table.SelectColumns(FonteGrupos, {"Group_Id"}),
+				
+				    // Chama a função para obter relatórios
+				    RelatoriosAdicionados = Table.AddColumn(GruposSelecionados, "Reports", each #"(Fun02) Get Reports"([Group_Id])),
+				    RelatoriosExpandidos = Table.ExpandTableColumn(RelatoriosAdicionados, "Reports", {"Column1"}),
+				
+				    // Expande todas as colunas dos relatórios
+				    ColunasExpandidas = Table.ExpandRecordColumn(RelatoriosExpandidos, "Column1", 
+				        {"id", "reportType", "name", "webUrl", "embedUrl", "isFromPbix", "isOwnedByMe", "datasetId", "datasetWorkspaceId", "users", "subscriptions", "reportFlags"},
+				        {"Report_Id", "Report_Type", "Report_Name", "Report_WebUrl", "Report_EmbedUrl", "Report_IsFromPbix", "Report_IsOwnedByMe", "Report_DatasetId", "Report_DatasetWorkspaceId", "Report_Users", "Report_Subscriptions", "Report_Flags"}
+				    ),
+				    TipoAlterado = Table.TransformColumnTypes(ColunasExpandidas,{{"Group_Id", type text}, {"Report_Id", type text}, {"Report_Type", type text}, {"Report_Name", type text}, {"Report_WebUrl", type text}, {"Report_EmbedUrl", type text}, {"Report_IsFromPbix", type logical}, {"Report_IsOwnedByMe", type logical}, {"Report_DatasetId", type text}, {"Report_DatasetWorkspaceId", type text}, {"Report_Users", type any}, {"Report_Subscriptions", type any}, {"Report_Flags", Int64.Type}})
+				in
+				    TipoAlterado
+				```
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+
