@@ -1,0 +1,101 @@
+table '(Tab01) Get Groups'
+	lineageTag: 68bd421c-522d-4e25-aec6-741ebf9a5489
+
+	column Group_CapacityId
+		dataType: string
+		lineageTag: d5217ee4-bf6a-4627-81b9-712c24b0bfe5
+		summarizeBy: none
+		sourceColumn: Group_CapacityId
+
+		annotation SummarizationSetBy = Automatic
+
+	column Group_DataflowStorageId
+		dataType: string
+		lineageTag: 443a4dd4-bb8b-434f-8363-b1ccdab62d48
+		summarizeBy: none
+		sourceColumn: Group_DataflowStorageId
+
+		annotation SummarizationSetBy = Automatic
+
+	column Group_DefaultDatasetStorageFormat
+		dataType: string
+		lineageTag: bf7640ed-e03f-4efd-aefd-11af91d8645c
+		summarizeBy: none
+		sourceColumn: Group_DefaultDatasetStorageFormat
+
+		annotation SummarizationSetBy = Automatic
+
+	column Group_Id
+		dataType: string
+		lineageTag: 85c5ea2c-6ff4-4ba3-925a-81c37c745a47
+		summarizeBy: none
+		sourceColumn: Group_Id
+
+		annotation SummarizationSetBy = Automatic
+
+	column Group_IsOnDedicatedCapacity
+		dataType: string
+		lineageTag: d60ce40d-8391-46ed-99e6-562994b36f67
+		summarizeBy: none
+		sourceColumn: Group_IsOnDedicatedCapacity
+
+		annotation SummarizationSetBy = Automatic
+
+	column Group_IsReadOnly
+		dataType: string
+		lineageTag: 5ac25cef-8266-4669-b1a3-6780d3c630ab
+		summarizeBy: none
+		sourceColumn: Group_IsReadOnly
+
+		annotation SummarizationSetBy = Automatic
+
+	column Group_LogAnalyticsWorkspace
+		dataType: string
+		lineageTag: f532c7fe-0a50-4628-b67f-f2754257c7fc
+		summarizeBy: none
+		sourceColumn: Group_LogAnalyticsWorkspace
+
+		annotation SummarizationSetBy = Automatic
+
+	column Group_Name
+		dataType: string
+		lineageTag: f9dedcc8-f814-4570-b260-4909def00904
+		summarizeBy: none
+		sourceColumn: Group_Name
+
+		annotation SummarizationSetBy = Automatic
+
+	partition '(Tab01) Get Groups' = m
+		mode: import
+		source = ```
+				let
+				    // Obtém o token de acesso
+				    TokenAcesso = #"(Fun01) Get Token"(),
+				
+				    // Define URL da API para listar grupos
+				    UrlGrupos = "https://api.powerbi.com/v1.0/myorg/groups?$top=1000",
+				
+				    // Requisição GET na API
+				    RespostaApi = Json.Document(Web.Contents(UrlGrupos, [
+				        Headers = [#"Authorization" = "Bearer " & TokenAcesso]
+				    ])),
+				
+				    // Extrai lista de grupos
+				    ListaGrupos = RespostaApi[value],
+				
+				    // Converte lista para tabela
+				    TabelaGrupos = Table.FromList(ListaGrupos, Splitter.SplitByNothing(), null, null, ExtraValues.Error),
+				
+				    // Expande todas as colunas dos grupos
+				    GruposExpandidos = Table.ExpandRecordColumn(TabelaGrupos, "Column1", 
+				        {"capacityId", "dataflowStorageId", "defaultDatasetStorageFormat", "id", "isOnDedicatedCapacity", "isReadOnly", "logAnalyticsWorkspace", "name"},
+				        {"Group_CapacityId", "Group_DataflowStorageId", "Group_DefaultDatasetStorageFormat", "Group_Id", "Group_IsOnDedicatedCapacity", "Group_IsReadOnly", "Group_LogAnalyticsWorkspace", "Group_Name"}
+				    )
+				in
+				    GruposExpandidos
+				```
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+
