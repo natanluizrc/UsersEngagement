@@ -1,0 +1,79 @@
+table '(Tab05) Get Users'
+	lineageTag: e481cd53-c30b-40f1-b95a-df6461ea5221
+
+	column Group_Id
+		dataType: string
+		lineageTag: 55b6cac7-d111-44dc-9c55-787e41e601d6
+		summarizeBy: none
+		sourceColumn: Group_Id
+
+		annotation SummarizationSetBy = Automatic
+
+	column User_EmailAddress
+		dataType: string
+		lineageTag: e7688a6b-779d-4ae2-b1e2-bd2dafac527f
+		summarizeBy: none
+		sourceColumn: User_EmailAddress
+
+		annotation SummarizationSetBy = Automatic
+
+	column User_GroupUserAccessRight
+		dataType: string
+		lineageTag: b82e44ed-2eb1-45a8-8f03-7266c7c0b83d
+		summarizeBy: none
+		sourceColumn: User_GroupUserAccessRight
+
+		annotation SummarizationSetBy = Automatic
+
+	column User_DisplayName
+		dataType: string
+		lineageTag: d9f97ae3-6579-4603-97af-33d38af06196
+		summarizeBy: none
+		sourceColumn: User_DisplayName
+
+		annotation SummarizationSetBy = Automatic
+
+	column User_Identifier
+		dataType: string
+		lineageTag: c0b85249-3afc-45cb-9c05-c556a8c3a768
+		summarizeBy: none
+		sourceColumn: User_Identifier
+
+		annotation SummarizationSetBy = Automatic
+
+	column User_PrincipalType
+		dataType: string
+		lineageTag: 60f72c1f-a37d-4ae4-b28b-733a60b88243
+		summarizeBy: none
+		sourceColumn: User_PrincipalType
+
+		annotation SummarizationSetBy = Automatic
+
+	partition '(Tab05) Get Users' = m
+		mode: import
+		source = ```
+				let
+				    // Obtém os grupos
+				    FonteGrupos = #"(Tab01) Get Groups",
+				
+				    // Mantém apenas a coluna Group_Id
+				    GruposSelecionados = Table.SelectColumns(FonteGrupos, {"Group_Id"}),
+				
+				    // Chama a função para obter usuários
+				    UsuariosAdicionados = Table.AddColumn(GruposSelecionados, "Users", each #"(Fun05) Get Users"([Group_Id])),
+				    UsuariosExpandidos = Table.ExpandTableColumn(UsuariosAdicionados, "Users", {"Column1"}),
+				
+				    // Expande todas as colunas dos usuários
+				    ColunasExpandidas = Table.ExpandRecordColumn(UsuariosExpandidos, "Column1", 
+				        {"emailAddress", "groupUserAccessRight", "displayName", "identifier", "principalType"},
+				        {"User_EmailAddress", "User_GroupUserAccessRight", "User_DisplayName", "User_Identifier", "User_PrincipalType"}
+				    ),
+				    TipoAlterado = Table.TransformColumnTypes(ColunasExpandidas,{{"Group_Id", type text}, {"User_EmailAddress", type text}, {"User_GroupUserAccessRight", type text}, {"User_DisplayName", type text}, {"User_Identifier", type text}, {"User_PrincipalType", type text}})
+				in
+				    TipoAlterado
+				```
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+
