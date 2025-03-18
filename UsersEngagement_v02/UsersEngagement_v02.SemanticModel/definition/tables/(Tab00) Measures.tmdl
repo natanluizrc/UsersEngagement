@@ -1,0 +1,36 @@
+table '(Tab00) Measures'
+	lineageTag: b8ae65cf-28ee-4318-8b7a-cc2ed9edf963
+
+	column Measures
+		dataType: string
+		lineageTag: 983d1bfe-251d-49e0-bd40-1caf054d5d03
+		summarizeBy: none
+		sourceColumn: Measures
+
+		annotation SummarizationSetBy = Automatic
+
+	partition '(Tab00) Measures' = m
+		mode: import
+		source = ```
+				let
+				    // Carrega a tabela de medidas comprimida
+				    FonteDados = Table.FromRows(
+				        Json.Document(
+				            Binary.Decompress(
+				                Binary.FromText("i45W8k1NLC4tSi1Wio0FAA==", BinaryEncoding.Base64), 
+				                Compression.Deflate
+				            )
+				        ), 
+				        let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [Measures = _t]
+				    ),
+				
+				    // Altera o tipo de dados da coluna Measures para texto
+				    TipoAlterado = Table.TransformColumnTypes(FonteDados, {{"Measures", type text}})
+				in
+				    TipoAlterado
+				```
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+
