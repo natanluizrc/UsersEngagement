@@ -1,0 +1,20 @@
+relationship AutoDetected_896a4dd1-3086-4574-8b1f-b41401b9744d
+	fromColumn: '(Tab02) Get Reports'.Group_Id
+	toColumn: '(Tab01) Get Groups'.Group_Id
+
+relationship AutoDetected_9510577c-f733-4dd1-b6e2-59bdc64b7e39
+	fromColumn: '(Tab03) Get Datasets'.Group_Id
+	toColumn: '(Tab01) Get Groups'.Group_Id
+
+relationship AutoDetected_7ad971f6-da5a-4228-9b6c-2356e0fa1598
+	fromColumn: '(Tab04) Get Dataflows'.Group_Id
+	toColumn: '(Tab01) Get Groups'.Group_Id
+
+relationship AutoDetected_a743cc17-2163-4adc-8e98-231e5b346350
+	fromColumn: '(Tab05) Get Users'.Group_Id
+	toColumn: '(Tab01) Get Groups'.Group_Id
+
+relationship 099762f8-4dfa-b2ed-eda4-4ead1341aaab
+	fromColumn: '(Tab06) Get Activity Events'.Event_WorkspaceId
+	toColumn: '(Tab01) Get Groups'.Group_Id
+
