@@ -1,0 +1,4 @@
+relationship AutoDetected_4668cff3-aab9-40b5-8e97-f09abe487dbe
+	fromColumn: '(Tab02) Get Reports'.Group_Id
+	toColumn: '(Tab01) Get Groups'.Group_Id
+
