@@ -1,0 +1,88 @@
+table '(Tab04) Get Dataflows'
+	lineageTag: 0e131249-c39f-428d-bd29-54f4dfdbe6f9
+
+	column Group_Id
+		dataType: string
+		lineageTag: 20bae032-abda-4c71-9dd0-fad4e56d02f9
+		summarizeBy: none
+		sourceColumn: Group_Id
+
+		annotation SummarizationSetBy = Automatic
+
+	column Dataflow_ConfiguredBy
+		dataType: string
+		lineageTag: bfa957ed-7af7-43e4-ba5a-c4ab792f23cf
+		summarizeBy: none
+		sourceColumn: Dataflow_ConfiguredBy
+
+		annotation SummarizationSetBy = Automatic
+
+	column Dataflow_Description
+		dataType: string
+		lineageTag: 2625e08f-1fc6-4d87-941b-885b3c28231e
+		summarizeBy: none
+		sourceColumn: Dataflow_Description
+
+		annotation SummarizationSetBy = Automatic
+
+	column Dataflow_Name
+		dataType: string
+		lineageTag: 47774480-e54a-4272-8377-af102d77ef05
+		summarizeBy: none
+		sourceColumn: Dataflow_Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column Dataflow_ObjectId
+		dataType: string
+		lineageTag: 63a8b708-92fd-4bfb-ad2c-f7d06360766e
+		summarizeBy: none
+		sourceColumn: Dataflow_ObjectId
+
+		annotation SummarizationSetBy = Automatic
+
+	column Dataflow_Users
+		dataType: string
+		lineageTag: 99aad160-6871-42d4-9b15-17cde733e849
+		summarizeBy: none
+		sourceColumn: Dataflow_Users
+
+		annotation SummarizationSetBy = Automatic
+
+	column Dataflow_Generation
+		dataType: int64
+		formatString: 0
+		lineageTag: 12426dc2-0ed2-4444-90f5-c1f39fc15c63
+		summarizeBy: sum
+		sourceColumn: Dataflow_Generation
+
+		annotation SummarizationSetBy = Automatic
+
+	partition '(Tab04) Get Dataflows' = m
+		mode: import
+		source = ```
+				let
+				    // Obtém os grupos
+				    FonteGrupos = #"(Tab01) Get Groups",
+				
+				    // Mantém apenas a coluna Group_Id
+				    GruposSelecionados = Table.SelectColumns(FonteGrupos, {"Group_Id"}),
+				
+				    // Chama a função para obter dataflows
+				    DataflowsAdicionados = Table.AddColumn(GruposSelecionados, "Dataflows", each #"(Fun04) Get Dataflows"([Group_Id])),
+				    DataflowsExpandidos = Table.ExpandTableColumn(DataflowsAdicionados, "Dataflows", {"Column1"}),
+				
+				    // Expande todas as colunas dos dataflows
+				    ColunasExpandidas = Table.ExpandRecordColumn(DataflowsExpandidos, "Column1", 
+				        {"objectId", "name", "description", "configuredBy", "users", "generation"},
+				        {"Dataflow_ObjectId", "Dataflow_Name", "Dataflow_Description", "Dataflow_ConfiguredBy", "Dataflow_Users", "Dataflow_Generation"}
+				    ),
+				    TipoAlterado = Table.TransformColumnTypes(ColunasExpandidas,{{"Group_Id", type text}, {"Dataflow_ObjectId", type text}, {"Dataflow_Name", type text}, {"Dataflow_Description", type any}, {"Dataflow_ConfiguredBy", type text}, {"Dataflow_Users", type any}, {"Dataflow_Generation", Int64.Type}})
+				in
+				    TipoAlterado
+				```
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+
