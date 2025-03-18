@@ -1,0 +1,5 @@
+# Ignora o arquivo de configurações locais do Power BI
+**/.pbi/localSettings.json
+
+# Ignora o cache do Power BI, que pode conter dados temporários e sensíveis
+**/.pbi/cache.abf
