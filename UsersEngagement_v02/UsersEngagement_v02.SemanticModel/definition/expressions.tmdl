@@ -1,0 +1,88 @@
+expression TenantId = "***********************" meta [IsParameterQuery=true, Type="Text", IsParameterQueryRequired=true]
+	lineageTag: 44d137e9-b436-454d-a686-fa3a8598c307
+	queryGroup: Parâmetros
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Text
+
+expression ClientId = "***********************" meta [IsParameterQuery=true, Type="Text", IsParameterQueryRequired=true]
+	lineageTag: ad11ee6f-34c7-43ed-9036-3eaf63986792
+	queryGroup: Parâmetros
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Text
+
+expression ClientSecret = "***********************" meta [IsParameterQuery=true, Type="Text", IsParameterQueryRequired=true]
+	lineageTag: c42d3789-a85d-4da9-a8ef-3e2a279a66e9
+	queryGroup: Parâmetros
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Text
+
+expression '(Fun01) Get Token' =
+		let
+		    // Função para obter o token de acesso
+		    ObterTokenAcesso = () =>
+		    let
+		        // Credenciais fixas
+		        IdLocatario = #"TenantId",
+		        IdCliente = #"ClientId",
+		        SegredoCliente = #"ClientSecret",
+		
+		        // URL para obter o token
+		        UrlToken = "https://login.microsoftonline.com/" & IdLocatario & "/oauth2/v2.0/token",
+		
+		        // Parâmetros da requisição
+		        DadosRequisicao = "grant_type=client_credentials&client_id=" & IdCliente & "&client_secret=" & SegredoCliente & "&scope=https://analysis.windows.net/powerbi/api/.default",
+		
+		        // Chamada da API
+		        RespostaApi = Web.Contents(UrlToken, [
+		            Content = Text.ToBinary(DadosRequisicao),
+		            Headers = [#"Content-Type"="application/x-www-form-urlencoded"]
+		        ]),
+		
+		        // Extrai o token de acesso
+		        JsonToken = Json.Document(RespostaApi),
+		        TokenAcesso = JsonToken[access_token]
+		    in
+		        TokenAcesso
+		in
+		    ObterTokenAcesso
+	lineageTag: e7db4c7e-9867-4c52-adf0-5a6bb7a9d897
+	queryGroup: Funções
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Function
+
+expression '(Fun02) Get Reports' =
+		(GroupId as text) =>
+		let
+		    // Obtém o token de acesso
+		    TokenAcesso = #"(Fun01) Get Token"(),
+		
+		    // Define URL da API para listar relatórios
+		    UrlRelatorios = "https://api.powerbi.com/v1.0/myorg/groups/" & GroupId & "/reports",
+		
+		    // Requisição GET na API
+		    RespostaApi = Json.Document(Web.Contents(UrlRelatorios, [
+		        Headers = [#"Authorization" = "Bearer " & TokenAcesso]
+		    ])),
+		
+		    // Extrai lista de relatórios
+		    ListaRelatorios = RespostaApi[value],
+		
+		    // Converte lista para tabela
+		    TabelaRelatorios = Table.FromList(ListaRelatorios, Splitter.SplitByNothing(), null, null, ExtraValues.Error)
+		in
+		    TabelaRelatorios
+	lineageTag: 4c2a11b0-00cb-4250-83cc-67d3ba99a84f
+	queryGroup: Funções
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Function
+
