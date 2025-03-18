@@ -1,0 +1,261 @@
+table '(Tab06) Get Activity Events'
+	lineageTag: 415e555b-6f37-4022-a7a0-ee04a52643b4
+
+	column Event_Id
+		dataType: string
+		lineageTag: c82750f8-2c98-4512-8f60-14cab279a12f
+		summarizeBy: none
+		sourceColumn: Event_Id
+
+		annotation SummarizationSetBy = Automatic
+
+	column Event_RecordType
+		dataType: int64
+		formatString: 0
+		lineageTag: 23d2fa94-7043-4267-adf7-ebbda0cc9a9f
+		summarizeBy: sum
+		sourceColumn: Event_RecordType
+
+		annotation SummarizationSetBy = Automatic
+
+	column Event_CreationTime
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 649f8c0e-3ab2-4707-8f93-7ea518476325
+		summarizeBy: none
+		sourceColumn: Event_CreationTime
+
+		annotation SummarizationSetBy = Automatic
+
+	column Event_Operation
+		dataType: string
+		lineageTag: 2abc54a4-22f5-45a5-a905-a369dfbb8e13
+		summarizeBy: none
+		sourceColumn: Event_Operation
+
+		annotation SummarizationSetBy = Automatic
+
+	column Event_OrganizationId
+		dataType: string
+		lineageTag: f24018a7-7e9f-49da-ab3e-5ea1dc8db01c
+		summarizeBy: none
+		sourceColumn: Event_OrganizationId
+
+		annotation SummarizationSetBy = Automatic
+
+	column Event_UserType
+		dataType: int64
+		formatString: 0
+		lineageTag: aabaa035-6fae-4066-bfab-2dacf72040e6
+		summarizeBy: sum
+		sourceColumn: Event_UserType
+
+		annotation SummarizationSetBy = Automatic
+
+	column Event_UserKey
+		dataType: string
+		lineageTag: 74c3a732-c048-4b84-a9cf-dd69182542b9
+		summarizeBy: none
+		sourceColumn: Event_UserKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column Event_Workload
+		dataType: string
+		lineageTag: 7946201a-2c9f-4602-9231-afb9189c311f
+		summarizeBy: none
+		sourceColumn: Event_Workload
+
+		annotation SummarizationSetBy = Automatic
+
+	column Event_UserId
+		dataType: string
+		lineageTag: c0025376-caba-41b5-aeb3-6aaec682a118
+		summarizeBy: none
+		sourceColumn: Event_UserId
+
+		annotation SummarizationSetBy = Automatic
+
+	column Event_ClientIP
+		dataType: string
+		lineageTag: e3c08504-d3c8-4ead-b1da-d4f1e3132858
+		summarizeBy: none
+		sourceColumn: Event_ClientIP
+
+		annotation SummarizationSetBy = Automatic
+
+	column Event_UserAgent
+		dataType: string
+		lineageTag: 6e80f120-d24b-49d3-8b6d-4302c6443d4a
+		summarizeBy: none
+		sourceColumn: Event_UserAgent
+
+		annotation SummarizationSetBy = Automatic
+
+	column Event_Activity
+		dataType: string
+		lineageTag: 684ac464-6453-4bc5-9ff0-f493e2a9030a
+		summarizeBy: none
+		sourceColumn: Event_Activity
+
+		annotation SummarizationSetBy = Automatic
+
+	column Event_IsSuccess
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 54c76183-8009-4a9d-84f9-0aa46d2068b3
+		summarizeBy: none
+		sourceColumn: Event_IsSuccess
+
+		annotation SummarizationSetBy = Automatic
+
+	column Event_RequestId
+		dataType: string
+		lineageTag: 22ca6b7e-6b34-4982-b244-6ea95979c8f4
+		summarizeBy: none
+		sourceColumn: Event_RequestId
+
+		annotation SummarizationSetBy = Automatic
+
+	column Event_ActivityId
+		dataType: string
+		lineageTag: 221df39e-dd7d-451a-8074-47cc5bfb36fc
+		summarizeBy: none
+		sourceColumn: Event_ActivityId
+
+		annotation SummarizationSetBy = Automatic
+
+	column Event_ModelsSnapshots
+		dataType: string
+		lineageTag: 0affd789-8bda-4cd0-948e-a87164b9662b
+		summarizeBy: none
+		sourceColumn: Event_ModelsSnapshots
+
+		annotation SummarizationSetBy = Automatic
+
+	column Event_RefreshEnforcementPolicy
+		dataType: int64
+		formatString: 0
+		lineageTag: f97c1bc8-9294-4922-a336-a5fe0881e1c0
+		summarizeBy: sum
+		sourceColumn: Event_RefreshEnforcementPolicy
+
+		annotation SummarizationSetBy = Automatic
+
+	column Event_BillingType
+		dataType: int64
+		formatString: 0
+		lineageTag: 8f7ea073-5077-4f18-87e3-d196ade25620
+		summarizeBy: sum
+		sourceColumn: Event_BillingType
+
+		annotation SummarizationSetBy = Automatic
+
+	column Event_ItemName
+		dataType: string
+		lineageTag: 49076088-56cf-434b-b435-ca8d9fca3b26
+		summarizeBy: none
+		sourceColumn: Event_ItemName
+
+		annotation SummarizationSetBy = Automatic
+
+	column Event_WorkSpaceName
+		dataType: string
+		lineageTag: 573e1d65-c4cd-4195-bac0-27062de4822c
+		summarizeBy: none
+		sourceColumn: Event_WorkSpaceName
+
+		annotation SummarizationSetBy = Automatic
+
+	column Event_WorkspaceId
+		dataType: string
+		lineageTag: e01f4d56-ab29-4af0-9009-a609078d321a
+		summarizeBy: none
+		sourceColumn: Event_WorkspaceId
+
+		annotation SummarizationSetBy = Automatic
+
+	column Event_ObjectId
+		dataType: string
+		lineageTag: ffc1e1b5-36b5-4b05-af27-3bb25c81042a
+		summarizeBy: none
+		sourceColumn: Event_ObjectId
+
+		annotation SummarizationSetBy = Automatic
+
+	column Event_FolderObjectId
+		dataType: string
+		lineageTag: 64f3597d-b299-4634-ac4f-9b66e5770b77
+		summarizeBy: none
+		sourceColumn: Event_FolderObjectId
+
+		annotation SummarizationSetBy = Automatic
+
+	column Event_FolderDisplayName
+		dataType: string
+		lineageTag: 6ea1c710-9966-4d98-b154-6d983510ef45
+		summarizeBy: none
+		sourceColumn: Event_FolderDisplayName
+
+		annotation SummarizationSetBy = Automatic
+
+	column Event_RolePermissions
+		dataType: string
+		lineageTag: c87f765f-1c8f-4d7c-b409-a53e68948d1c
+		summarizeBy: none
+		sourceColumn: Event_RolePermissions
+
+		annotation SummarizationSetBy = Automatic
+
+	column Event_UserObjectId
+		dataType: string
+		lineageTag: 53d64f39-9e18-4d10-95d1-14b61c4ac0dc
+		summarizeBy: none
+		sourceColumn: Event_UserObjectId
+
+		annotation SummarizationSetBy = Automatic
+
+	partition '(Tab06) Get Activity Events' = m
+		mode: import
+		source = ```
+				let
+				    // Obtém o token de acesso
+				    TokenAcesso = #"(Fun01) Get Token"(),
+				
+				    // Define URL da API para eventos de atividade
+				    UrlEventos = "https://api.powerbi.com/v1.0/myorg/admin/activityevents?startDateTime='2025-03-07T00:00:00.000Z'&endDateTime='2025-03-07T23:59:59.999Z'",
+				
+				    // Requisição GET na API do Power BI
+				    RespostaApi = Json.Document(Web.Contents(UrlEventos, [
+				        Headers = [#"Authorization" = "Bearer " & TokenAcesso]
+				    ])),
+				
+				    // Obtém a lista de eventos
+				    ListaEventos = RespostaApi[activityEventEntities],
+				
+				    // Converte os eventos para uma tabela
+				    TabelaEventos = Table.FromList(ListaEventos, Splitter.SplitByNothing(), null, null, ExtraValues.Error),
+				
+				    // Expande todas as colunas dos eventos
+				    EventosExpandidos = Table.ExpandRecordColumn(TabelaEventos, "Column1", 
+				        {"Id", "RecordType", "CreationTime", "Operation", "OrganizationId", "UserType", "UserKey", "Workload", 
+				         "UserId", "ClientIP", "UserAgent", "Activity", "IsSuccess", "RequestId", "ActivityId", "ModelsSnapshots", 
+				         "RefreshEnforcementPolicy", "BillingType", "ItemName", "WorkSpaceName", "WorkspaceId", "ObjectId", 
+				         "FolderObjectId", "FolderDisplayName", "FolderAccessRequests"},
+				        {"Event_Id", "Event_RecordType", "Event_CreationTime", "Event_Operation", "Event_OrganizationId", "Event_UserType", 
+				         "Event_UserKey", "Event_Workload", "Event_UserId", "Event_ClientIP", "Event_UserAgent", "Event_Activity", 
+				         "Event_IsSuccess", "Event_RequestId", "Event_ActivityId", "Event_ModelsSnapshots", "Event_RefreshEnforcementPolicy", 
+				         "Event_BillingType", "Event_ItemName", "Event_WorkSpaceName", "Event_WorkspaceId", "Event_ObjectId", 
+				         "Event_FolderObjectId", "Event_FolderDisplayName", "Event_FolderAccessRequests"}
+				    ),
+				    #"Event_FolderAccessRequests Expandido" = Table.ExpandListColumn(EventosExpandidos, "Event_FolderAccessRequests"),
+				    #"Event_FolderAccessRequests Expandido1" = Table.ExpandRecordColumn(#"Event_FolderAccessRequests Expandido", "Event_FolderAccessRequests", {"RolePermissions", "UserObjectId"}, {"Event_RolePermissions", "Event_UserObjectId"}),
+				    TipoAlterado = Table.TransformColumnTypes(#"Event_FolderAccessRequests Expandido1",{{"Event_Id", type text}, {"Event_RecordType", Int64.Type}, {"Event_CreationTime", type datetime}, {"Event_Operation", type text}, {"Event_OrganizationId", type text}, {"Event_UserType", Int64.Type}, {"Event_UserKey", type text}, {"Event_Workload", type text}, {"Event_UserId", type text}, {"Event_ClientIP", type text}, {"Event_UserAgent", type text}, {"Event_Activity", type text}, {"Event_IsSuccess", type logical}, {"Event_RequestId", type text}, {"Event_ActivityId", type text}, {"Event_ModelsSnapshots", type any}, {"Event_RefreshEnforcementPolicy", Int64.Type}, {"Event_BillingType", Int64.Type}, {"Event_ItemName", type text}, {"Event_WorkSpaceName", type text}, {"Event_WorkspaceId", type text}, {"Event_ObjectId", type text}, {"Event_FolderObjectId", type text}, {"Event_FolderDisplayName", type text}, {"Event_RolePermissions", type text}, {"Event_UserObjectId", type text}})
+				in
+				    TipoAlterado
+				```
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+
